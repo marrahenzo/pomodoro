@@ -15,12 +15,27 @@ function getTimeValues() {
   return { pomodoro: pomodoroTime, rest: restTime };
 }
 
+//Restart timer
+function restartTimer() {
+  startButton.classList.remove('paused');
+  startButton.classList.remove('started');
+  updateTimer(getTimeValues().pomodoro);
+}
+
 //Get DOM buttons
 const startButton = document.querySelector('#btn-start')!;
-const restartButton = document.querySelector('#btn-restart')!;
+const resetButton = document.querySelector('#btn-reset')!;
 
-//Create new timer and set start button behavior
-const timer = new Timer({ interval: 1000 });
+//Create new timer
+const timer = new Timer({ interval: 100 });
+updateTimer(getTimeValues().pomodoro);
+
+//Update DOM based on time input
+pomodoroInput.addEventListener('change', () => {
+  updateTimer(getTimeValues().pomodoro);
+});
+
+//Start and reset button behavior
 startButton.addEventListener('click', () => {
   updateStartButton();
 
@@ -35,8 +50,13 @@ startButton.addEventListener('click', () => {
   }
 });
 
+resetButton.addEventListener('click', restartTimer);
+
 //Update DOM timer every 1 second
 timer.on('tick', (ms) => {
-  console.log(ms);
   updateTimer(ms);
+});
+
+timer.on('done', () => {
+  restartTimer();
 });

@@ -5,6 +5,7 @@ const config = {
   devtool: 'source-map',
   entry: './src/index.ts',
   output: {
+    publicPath: '',
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
@@ -16,14 +17,7 @@ const config = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          // Creates `style` nodes from JS strings
-          'style-loader',
-          // Translates CSS into CommonJS
-          'css-loader',
-          // Compiles Sass to CSS
-          'sass-loader'
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.ts(x)?$/,

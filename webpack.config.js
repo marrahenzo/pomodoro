@@ -11,6 +11,10 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(png|svg|jpg|jpeg|gif|ogg|mp3|wav)$/i,
+        type: 'asset/resource'
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings

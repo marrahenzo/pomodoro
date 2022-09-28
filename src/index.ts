@@ -2,6 +2,16 @@ import Timer from 'tiny-timer';
 import './style.scss';
 import { updateTimer, updateStartButton } from './domFunctions';
 
+//Global variable to determine timer state
+enum state {
+  POMODORO,
+  REST
+}
+let currentState = state.POMODORO;
+
+//Audio player
+let audio = new Audio('../src/media/notification.wav');
+
 //Get time values from form inputs
 const pomodoroInput = document.querySelector(
   '#time-pomodoro'
@@ -17,9 +27,16 @@ function getTimeValues() {
 
 //Restart timer
 function restartTimer() {
-  startButton.classList.remove('paused');
-  startButton.classList.remove('started');
-  updateTimer(getTimeValues().pomodoro);
+  timer.stop();
+  if (currentState == state.POMODORO) {
+    currentState = state.REST;
+    timer.start(getTimeValues().rest);
+    updateTimer(getTimeValues().rest);
+  } else {
+    currentState = state.POMODORO;
+    timer.start(getTimeValues().pomodoro);
+    updateTimer(getTimeValues().pomodoro);
+  }
 }
 
 //Get DOM buttons
@@ -39,18 +56,19 @@ pomodoroInput.addEventListener('change', () => {
 startButton.addEventListener('click', () => {
   updateStartButton();
 
-  if (!startButton.classList.contains('started')) {
+  if (timer.status === 'stopped') {
     timer.start(getTimeValues().pomodoro);
     updateTimer(getTimeValues().pomodoro);
-    startButton.classList.add('started');
   } else {
-    if (startButton.classList.contains('paused')) timer.resume();
+    if (timer.status === 'paused') timer.resume();
     else timer.pause();
-    startButton.classList.toggle('paused');
   }
 });
 
-resetButton.addEventListener('click', restartTimer);
+resetButton.addEventListener('click', () => {
+  timer.stop();
+  updateTimer(getTimeValues().pomodoro);
+});
 
 //Update DOM timer every 1 second
 timer.on('tick', (ms) => {
@@ -59,4 +77,5 @@ timer.on('tick', (ms) => {
 
 timer.on('done', () => {
   restartTimer();
+  audio.play();
 });

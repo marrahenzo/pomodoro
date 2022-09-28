@@ -1,4 +1,5 @@
 import { millisecondsToMinutesAndSeconds } from './helperFunctions';
+import Timer from 'tiny-timer';
 
 //Get DOM elements
 const timer = document.querySelector('#timer')!;
@@ -11,11 +12,15 @@ function updateTimer(time: number): void {
 }
 
 //Change start button's text
-function updateStartButton() {
-  if (startButton.textContent == 'Start') {
-    startButton.textContent = 'Pause';
-  } else {
-    startButton.textContent = 'Start';
+function updateStartButton(status: string): void {
+  switch (status) {
+    case 'running':
+      startButton.textContent = 'Pause';
+      break;
+    case 'paused':
+    case 'stopped':
+      startButton.textContent = 'Start';
+      break;
   }
 }
 

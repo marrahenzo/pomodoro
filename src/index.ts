@@ -20,7 +20,7 @@ const startButton = document.querySelector('#btn-start')!;
 const restartButton = document.querySelector('#btn-restart')!;
 
 //Create new timer and set start button behavior
-const timer = new Timer({ interval: 100 });
+const timer = new Timer({ interval: 1000 });
 startButton.addEventListener('click', () => {
   updateStartButton();
 

@@ -1,6 +1,6 @@
 import Timer from 'tiny-timer';
 import './style.scss';
-import { updateTimer } from './domFunctions';
+import { updateTimer, updateStartButton } from './domFunctions';
 
 //Get time values from form inputs
 const pomodoroInput = document.querySelector(
@@ -20,17 +20,17 @@ const startButton = document.querySelector('#btn-start')!;
 const restartButton = document.querySelector('#btn-restart')!;
 
 //Create new timer and set start button behavior
-const timer = new Timer({ interval: 1000 });
+const timer = new Timer({ interval: 100 });
 startButton.addEventListener('click', () => {
+  updateStartButton();
+
   if (!startButton.classList.contains('started')) {
     timer.start(getTimeValues().pomodoro);
     updateTimer(getTimeValues().pomodoro);
     startButton.classList.add('started');
-  } else if (startButton.classList.contains('paused')) {
-    timer.resume();
-    startButton.classList.toggle('paused');
   } else {
-    timer.pause();
+    if (startButton.classList.contains('paused')) timer.resume();
+    else timer.pause();
     startButton.classList.toggle('paused');
   }
 });

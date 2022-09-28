@@ -1,7 +1,8 @@
 import { millisecondsToMinutesAndSeconds } from './helperFunctions';
 
-//Get DOM timer
+//Get DOM elements
 const timer = document.querySelector('#timer')!;
+const startButton = document.querySelector('#btn-start')!;
 
 //Set DOM timer's value
 function updateTimer(time: number): void {
@@ -9,4 +10,13 @@ function updateTimer(time: number): void {
   timer.textContent = newTime;
 }
 
-export { updateTimer };
+//Change start button's text
+function updateStartButton() {
+  if (startButton.textContent == 'Start') {
+    startButton.textContent = 'Pause';
+  } else {
+    startButton.textContent = 'Start';
+  }
+}
+
+export { updateTimer, updateStartButton };

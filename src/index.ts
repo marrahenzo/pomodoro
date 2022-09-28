@@ -1,6 +1,7 @@
 import Timer from 'tiny-timer';
 import './style.scss';
 import { updateTimer, updateStartButton } from './domFunctions';
+const audioFile = require('../src/media/notification.wav');
 
 //Global variable to determine timer state
 enum state {
@@ -10,7 +11,7 @@ enum state {
 let currentState = state.POMODORO;
 
 //Audio player
-let audio = new Audio('../src/media/notification.wav');
+let audio = new Audio(audioFile);
 
 //Get time values from form inputs
 const pomodoroInput = document.querySelector(

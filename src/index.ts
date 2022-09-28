@@ -55,8 +55,6 @@ pomodoroInput.addEventListener('change', () => {
 
 //Start and reset button behavior
 startButton.addEventListener('click', () => {
-  updateStartButton();
-
   if (timer.status === 'stopped') {
     timer.start(getTimeValues().pomodoro);
     updateTimer(getTimeValues().pomodoro);
@@ -64,10 +62,13 @@ startButton.addEventListener('click', () => {
     if (timer.status === 'paused') timer.resume();
     else timer.pause();
   }
+
+  updateStartButton(timer.status);
 });
 
 resetButton.addEventListener('click', () => {
   timer.stop();
+  updateStartButton(timer.status);
   updateTimer(getTimeValues().pomodoro);
 });
 

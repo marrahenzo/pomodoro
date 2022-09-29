@@ -1,9 +1,9 @@
 import { millisecondsToMinutesAndSeconds } from './helperFunctions';
-import Timer from 'tiny-timer';
 
 //Get DOM elements
 const timer = document.querySelector('#timer')!;
 const startButton = document.querySelector('#btn-start')!;
+const counter = document.querySelector('#counter')!;
 
 //Set DOM timer's value
 function updateTimer(time: number): void {
@@ -24,4 +24,8 @@ function updateStartButton(status: string): void {
   }
 }
 
-export { updateTimer, updateStartButton };
+function updateCounter(count: number): void {
+  counter.textContent = `You have completed ${count} pomodoro(s)`;
+}
+
+export { updateTimer, updateStartButton, updateCounter };

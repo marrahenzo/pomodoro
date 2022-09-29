@@ -24,8 +24,9 @@ function updateStartButton(status: string): void {
   }
 }
 
-function updateCounter(count: number): void {
+//Update pomodoro counter
+function updatePomodoroCounter(count: number): void {
   counter.textContent = `You have completed ${count} pomodoro(s)`;
 }
 
-export { updateTimer, updateStartButton, updateCounter };
+export { updateTimer, updateStartButton, updatePomodoroCounter };

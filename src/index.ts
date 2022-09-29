@@ -1,6 +1,10 @@
 import Timer from 'tiny-timer';
 import './style.scss';
-import { updateTimer, updateStartButton, updateCounter } from './domFunctions';
+import {
+  updateTimer,
+  updateStartButton,
+  updatePomodoroCounter
+} from './domFunctions';
 const audioFile = require('../src/media/notification.wav');
 
 //Global variables
@@ -11,7 +15,7 @@ enum state {
 let currentState = state.POMODORO;
 //Setup pomodoro counter string
 let pomodoroCounter = 0;
-updateCounter(pomodoroCounter);
+updatePomodoroCounter(pomodoroCounter);
 
 //Audio player
 let audio = new Audio(audioFile);
@@ -40,7 +44,7 @@ function restartTimer() {
     currentState = state.POMODORO;
     timer.start(getTimeValues().pomodoro);
     updateTimer(getTimeValues().pomodoro);
-    updateCounter(++pomodoroCounter);
+    updatePomodoroCounter(++pomodoroCounter);
   }
 }
 

@@ -3,7 +3,8 @@ import './style.scss';
 import {
   updateTimer,
   updateStartButton,
-  updatePomodoroCounter
+  updatePomodoroCounter,
+  changeTimerColor
 } from './domFunctions';
 const audioFile = require('../src/media/notification.wav');
 
@@ -40,11 +41,13 @@ function restartTimer() {
     currentState = state.REST;
     timer.start(getTimeValues().rest);
     updateTimer(getTimeValues().rest);
+    changeTimerColor('orange');
   } else {
     currentState = state.POMODORO;
     timer.start(getTimeValues().pomodoro);
     updateTimer(getTimeValues().pomodoro);
     updatePomodoroCounter(++pomodoroCounter);
+    changeTimerColor('white');
   }
 }
 
@@ -78,6 +81,7 @@ resetButton.addEventListener('click', () => {
   timer.stop();
   updateStartButton(timer.status);
   updateTimer(getTimeValues().pomodoro);
+  changeTimerColor('white');
 });
 
 //Update DOM timer every 1 second

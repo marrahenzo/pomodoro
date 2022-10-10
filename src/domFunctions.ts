@@ -36,7 +36,7 @@ function changeTimerColor(color: string): void {
 
 //Sets the tab name to the current time
 function updateTabName(time: string): void {
-  document.title = `Pomodoro App ${time}`;
+  document.title = `${time} Pomodoro App `;
 }
 
 export {

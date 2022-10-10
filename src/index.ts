@@ -85,7 +85,7 @@ resetButton.addEventListener('click', () => {
 });
 
 //Update DOM timer every 1 second
-timer.on('tick', (ms) => {
+timer.on('tick', (ms: number) => {
   updateTimer(ms);
 });
 

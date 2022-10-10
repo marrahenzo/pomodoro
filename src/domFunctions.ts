@@ -9,6 +9,7 @@ const counter = document.querySelector('#counter')!;
 function updateTimer(time: number): void {
   let newTime = millisecondsToMinutesAndSeconds(time);
   timer.textContent = newTime;
+  updateTabName(newTime);
 }
 
 //Change start button's text
@@ -31,6 +32,11 @@ function updatePomodoroCounter(count: number): void {
 
 function changeTimerColor(color: string): void {
   timer.style.color = color;
+}
+
+//Sets the tab name to the current time
+function updateTabName(time: string): void {
+  document.title = `Pomodoro App ${time}`;
 }
 
 export {
